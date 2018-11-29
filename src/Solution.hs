@@ -1,6 +1,6 @@
 {-# LANGUAGE DuplicateRecordFields #-}
 
-module Solution where
+module Solution (Solution(Solution, name, parser, parts), showSolution) where
 
 import System.CPUTime
 import Control.Exception
@@ -18,8 +18,6 @@ data Solution a b = Solution {
     -- List of functions solving each part of the problem
     parts :: [a -> b]
 }
-
-type Result b = [(b, Int)]
 
 time :: t -> IO (t, Double)
 time a = do
