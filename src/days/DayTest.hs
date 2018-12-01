@@ -21,5 +21,5 @@ solution  = Solution {
         ("7", [49, 6]),
         ("2", [4, 1])
     ],
-    input = "10"
+    inputFile = "./data/days/DayTest.in"
 }

@@ -1,6 +1,6 @@
 {-# LANGUAGE DuplicateRecordFields #-}
 
-module Solution (Solution(Solution, name, parser, parts, examples, input), test, solve) where
+module Solution (Solution(Solution, name, parser, parts, examples, inputFile), test, solve) where
 
 import System.CPUTime
 import Control.Exception
@@ -20,7 +20,7 @@ data Solution a b = Solution {
     parts :: [a -> b],
     -- Example inputs with expected results for each part
     examples :: [(String, [b])],
-    input :: String
+    inputFile :: String
 }
 
 time :: t -> IO (t, Double)
@@ -63,8 +63,9 @@ test (Solution name parser parts examples _) = do
                     putStrLn $ "\t\tActual:   " ++ (show actual) ++ "\t(" ++ (show evalTime) ++ "ms)"
                             
 solve :: (Show b) => Solution a b -> IO ()
-solve (Solution name parser parts _ input) = do
+solve (Solution name parser parts _ inputFile) = do
     putStrLn $ "Solving problem \"" ++ name ++ "\""
+    input <- readFile inputFile
     -- Parse input
     case parse parser "" input of
         Left err -> putStrLn $ "Failed to parse input: " ++ (show err)
